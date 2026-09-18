@@ -41,7 +41,65 @@ int agregarContacto(Contacto agenda[], int n){
     cout<<"Contacto creado\n";
     return n+1;
 }
+
+int buscarContacto(Contacto agenda[], int n, string nombre){
+    for(int i = 0; i < n; i++){
+        if(agenda[i].nombre == nombre){
+            return i;
+        }
+    }
+    return -1;
+}
+
+void mostrarEncontrado(Contacto agenda[], int n){
+    string nombre;
+    cout<<"Nombre del contacto que desea mostrar:";
+    getline(cin>>ws, nombre);
+
+    int pos = buscarContacto(agenda, n, nombre);
+
+    if (pos == -1){
+        cout<<"No se encuentra contacto\n";
+        return;
+    }
+    cout<<"Contacto en la posicion"<<pos<<endl;
+    cout<<"nombre"<<agenda[pos].nombre<<endl;
+}
+
+void mostrarMenu(){
+    cout<<"Selesccion"<<endl;
+    cout<<"1 mostrar agenda"<<endl;
+    cout<<"2 agregar"<<endl;
+    cout<<"3 mostrar"<<endl;
+
+}
+
+void ejecutarAgenda(){
+    int opc;
+    do{
+        mostrarMenu();
+        cin>>opc;
+
+        switch (opc)
+        {
+        case 1:
+           mostrarAgenda(agenda, totalContactos);
+            break;
+            case 2:
+            totalContactos = agregarContacto(agenda, totalContactos);
+            break;
+            case 3:
+            mostrarEncontrado(agenda, totalContactos);
+            break;
+        
+        default:
+            break;
+        }
+    }while(opc != 4);
+}
+
 int main(){
+    ejecutarAgenda()
     return 0;
 
 }
